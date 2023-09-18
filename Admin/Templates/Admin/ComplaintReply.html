@@ -1,0 +1,40 @@
+
+{% extends 'Admin/Header.html'%}
+{% load static %}
+{% block content  %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint Reply</title>
+</head>
+<body>
+    <form action="" name="replyform" method="post">
+        {% csrf_token %}
+        <a href="{% url 'wadmin:Adminhome' %}">Home</a>
+        <table align="center" cellpadding="5" cellspacing="5" border="1">
+            <tr>
+                <td>Complaint Content</td>
+            </tr>
+            <tr>
+                <td>{{DATA.complaint_content}}</td>
+            </tr>
+        </table>
+        <br><br>
+        <table align="center" cellpadding="5" cellspacing="5" border="1">
+            <tr>
+            <th>Reply</th>
+        </tr>
+        <tr>
+            <td><textarea name="complaintreply" id="complaintreply" cols="30" rows="10" autocomplete="off" required="required" ></textarea></td>
+        </tr>
+        <tr><td><input type="submit" id="btnsubmit" name="btnsubmit" value="SUBMIT">
+            <input type="reset" id="btnreset" name="btnreset" value="RESET"></td></tr>
+        </table>
+    </form>
+</body>
+</html>
+
+{% endblock content %}

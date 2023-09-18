@@ -1,0 +1,47 @@
+
+{% extends 'Shop/Header.html'%}
+{% load static %}
+{% block content  %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+</head>
+<body>
+   
+    <form name="Editprofile" method="POST">
+        {% csrf_token %}
+        <table align="center" style="margin-top: 100px;">
+            <tr>
+                <td>Owner Name :</td>
+                <td>
+                    <input type="text" name="txtname" id="txtname"  value="{{Data.owner_name}}" autocomplete="off" required="required" pattern="[a-z A-Z]{4-15}" title="minimum 4 and maximum 15 length"/>
+                </td>
+            </tr>
+            <tr>
+                <td>Contact :</td>
+                <td><input type="text" name="txtcontact" id="txtcontact" value="{{Data.shop_contact}}" autocomplete="off" required="required" pattern="[0-9+]{10,13}" title="Numbers only Allowed"/></td>
+              </tr>
+              <tr>
+                <td>Email ID :</td>
+                <td><input type="email" name="txtemail" id="txtemail" value="{{Data.shop_email}}" autocomplete="off" required="required" pattern="[0-9a-zA-Z@.]{6-20}" title="Email ID" /></td>
+            </tr>
+            <tr>
+                <td>Address :</td>
+                <td>
+                <input type="text" name="txtaddress" id="txtaddress" value="{{Data.shop_address}}" autocomplete="off" required="required"/></td>
+              </tr>
+              <tr><td><input type="submit" name="btnupdate" id="btnupdate" value="UPDATE"/></td></tr>
+
+        </table>
+    </form>
+    <a href="{% url 'wshop:Myprofile' %}">My Profile</a>
+</body>
+</html>
+
+{% endblock content %}

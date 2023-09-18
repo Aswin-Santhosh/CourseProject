@@ -1,0 +1,53 @@
+
+{% extends 'Admin/Header.html'%}
+{% load static %}
+{% block content  %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form  name="UserDetails">
+        {% csrf_token %}
+        <a href="{% url 'wadmin:Adminhome' %}">Home</a>
+        <table align="center" border="1" cellpadding="15">
+            <tr>
+                <td> Sl No</td>
+                <td>user Name</td>
+                <td>User address</td>
+                <td>Distrct</td>
+                <td>Place</td>
+                <td>user Email</td>
+                <td>user Contact</td>
+                <td>user Photo</td>
+                <td>Action</td>
+            </tr>
+            {% for i in USER %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{i.user_name}}</td>
+                <td>{{i.user_address}}</td>
+                <td>{{i.place.district.district_name}}</td>
+                <td>{{i.place.place_name}}</td>
+                <td>{{i.user_email}}</td>
+                <td>{{i.user_contact}}</td>
+                <td><img src="{{i.user_photo.url}}" alt="img" width="150" height="150"></td>
+                <td></td>
+                
+            </tr>
+            {% endfor %}
+        </table>
+
+
+
+
+
+    </form>
+</body>
+</html>
+
+{% endblock content %}

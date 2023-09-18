@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palindromes btw 2 limit</title>
+</head>
+<body>
+    <form name="Palindrome" method="POST" >
+        {% csrf_token %}
+        <table align="center">
+            <tr>
+                <td>Enter the Number</td>
+                <td><input type="text" name="txtno1" id="txtno1"/></td>
+            </tr>
+            <tr>
+                <td>Enter the Number</td>
+                <td><input type="text" name="txtno2" id="txtno2"/></td>
+            </tr>
+            
+            <tr><td><input type="submit" name="btnSubmit" id="btnSubmit" value="Find"/></td></tr>
+            <tr>
+                <td>The Palindrome Numbers are</td>
+                <td>{{ res }}</td>
+            </tr>
+        </table>
+    
+       </form>
+</body>
+</html>

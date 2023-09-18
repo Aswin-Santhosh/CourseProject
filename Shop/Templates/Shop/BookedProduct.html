@@ -1,0 +1,49 @@
+
+{% extends 'Shop/Header.html'%}
+{% load static %}
+{% block content  %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booked Product</title>
+</head>
+<body>
+    <table align="center" border="1" cellspacing="1" cellpadding="10" style="margin-top: 100px;">
+        <tr>
+            <td>User name</td>
+            <td>User Contact</td>
+            <td>Product name</td>
+            <td>Product Image</td>
+            <td>Product Rate</td>
+            <td>Booking Quantity </td>
+            <td>Total Amount</td>
+            <td>Booking Date</td>
+            <td>ACTION</td>
+        </tr>
+        {% for i in PDATA %}
+        <tr>
+            <td>{{i.user.user_name}}</td>
+            <td>{{i.user.user_contact}}</td>
+            <td>{{i.product.product_name}}</td>
+            <td><img src="{{i.product.product_image.url}}" alt="img" width="100" height="100"></td>
+            <td>{{i.product.product_rate}}</td>
+            <td>{{i.booking_quantity}}</td>
+            <td>{{i.total_amount}}</td>
+            <td>{{i.booking_date}}</td>
+            <td>
+                <a href="{% url 'wshop:OrderAccept' i.id %}">ACCEPT</a>
+                <a href="{% url 'wshop:OrderReject' i.id %}">REJECT</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <a href="{% url 'wshop:ShopHome' %}">Home</a>
+
+</body>
+</html>
+
+
+{% endblock content %}

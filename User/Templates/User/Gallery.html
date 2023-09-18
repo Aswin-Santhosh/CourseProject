@@ -1,0 +1,70 @@
+
+{% extends 'User/Header.html'%}
+{% load static %}
+{% block content  %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        background-color: antiquewhite;
+    }
+</style>
+
+<body>
+    <form name="Gallery" enctype="multipart/form-data"></form>
+
+    <div align="center" style="margin-top: 150px;">
+        <table align="center">
+            <tr>
+                <td>
+                    <p align="center">{{DATA.product_name}}</p>
+                </td>
+                <td>
+                <p> {{DATA.product_details}}</p></td>     
+                <td>{{DATA.product_rate}}</td>
+            </tr>
+            </table>
+            <table align="center">
+            <tr>
+
+            {% for i in GALLERY %}
+    
+            <td>
+            <div style="text-align:center;border:1px solid black;margin:20px; padding:20px;width: 300px;">
+
+
+                <p><img src="{{i.image.url}}" alt="img" width="200px" height="200px" /></p>
+            
+                <p>{{i.cation}}</p>
+            
+            </div>
+        </td>
+        {% if forloop.counter|divisibleby:4 %}
+    </tr>
+    <tr>
+        {% endif %}
+
+
+        {% endfor %}
+        
+        </table>
+
+    </div>
+    </form>
+<a href="{% url 'wuser:ProductDetail' %}">Product</a>
+
+<a href="{% url 'wuser:Userhome' %}">Home</a>
+</body>
+
+</html>
+
+{% endblock content %}

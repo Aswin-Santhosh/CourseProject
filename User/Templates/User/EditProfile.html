@@ -1,0 +1,45 @@
+
+{% extends 'User/Header.html'%}
+{% load static %}
+{% block content  %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+</head>
+<body>
+   
+    <form name="Editprofile" method="POST">
+        {% csrf_token %}
+        <table align="center" cellpadding="8" cellspacing="5" style="margin-top: 150px;">
+            <tr>
+                <td>Name :</td>
+                <td>
+                    <input type="text" name="txtname" id="txtname" value="{{Data.user_name}}" autocomplete="off" required="required" pattern="[a-z A-Z]{4-15}" title="minimum 4 and maximum 15 length" />
+                </td>
+            </tr>
+            <tr>
+                <td>Contact :</td>
+                <td><input type="text" name="txtcontact" id="txtcontact" value="{{Data.user_contact}}" autocomplete="off" required="required" pattern="[0-9+]{10,13}" title="Numbers only Allowed" /></td>
+              </tr>
+              <tr>
+                <td>Email ID :</td>
+                <td><input type="email" name="txtemail" id="txtemail" value="{{Data.user_email}}" autocomplete="off" required="required" pattern="[0-9a-zA-Z@.]{6-20}" title="Email ID" /></td>
+            </tr>
+            <tr>
+                <td>Address :</td>
+                <td>
+                    <textarea name="txtaddress" id="txtaddress" cols="30" rows="10" required="required"> {{Data.user_address}}</textarea>
+              </tr>
+              <tr><td><input type="submit" name="btnupdate" id="btnupdate" value="UPDATE"/></td></tr>
+
+        </table>
+    </form>
+    <a href="{% url 'wuser:MyProfile' %}">My Profile</a>
+</body>
+</html>
+{% endblock content %}

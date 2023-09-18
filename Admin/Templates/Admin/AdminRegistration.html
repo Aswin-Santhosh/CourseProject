@@ -1,0 +1,68 @@
+
+{% extends 'Admin/Header.html'%}
+{% load static %}
+{% block content  %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Registration</title>
+</head>
+<body>
+    <form name="AdminRegistration" method="POST" >
+        {% csrf_token %}
+        <a href="{% url 'wadmin:Adminhome' %}">Home</a>
+        <table align="center">
+            <tr>
+                <td>Admin Name</td>
+                <td><input type="text" name="txtadminname" id="txtadminname" autocomplete="off" required="required" pattern="[a-z A-Z]{4-15}" title="minimum 4 and maximum 15 length"/></td>
+            </tr>
+            <tr>
+                <td>Admin Contact</td>
+                <td><input type="number" name="txtcontact" id="txtcontact" autocomplete="off" required="required" pattern="[0-9+]{10,13}" title="Numbers only Allowed" /></td>
+            </tr>
+            <tr>
+                <td>Admin Email ID</td>
+                <td><input type="email" name="txtadminemail" id="txtadminemail" autocomplete="off" required="required" pattern="[0-9a-zA-Z@.]{6-20}" title="Email ID"/></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="password" name="txtpassword" id="txtpassword" autocomplete="off" required="required" pattern="[0-9a-zA-Z@#$%]{8-15}" title="@#$% are only allowed in password"/></td>
+            </tr>
+            <tr><td><input type="submit" name="btnSubmit" id="btnSubmit" value="Register"/>
+                <input type="submit" name="btnCancel" id="btnCancel" value="Cancel"/>
+            </td>
+            </tr>
+        </table>
+    <br><br><Br>
+
+        
+        <table align="center">
+            <tr>
+                <td> Sl No</td>
+                <td>Admin Name</td>
+                <td>Admin Email</td>
+                <td>Admin Contact</td>
+                <td>Action</td>
+            </tr>
+            {% for i in addata %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{i.admin_name}}</td>
+                <td>{{i.admin_email}}</td>
+                <td>{{i.admin_contact}}</td>
+                <td><a href=" {% url 'wadmin:del_admin' i.id %} ">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+
+
+
+       </form>
+</body>
+</html>
+
+{% endblock content %}

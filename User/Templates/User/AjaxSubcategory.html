@@ -1,0 +1,5 @@
+<p id="sub_category"> {% for i in SUBCATE %}
+
+    {{i.subcategory_name}}:<input type="checkbox" value="{{i.id}}" id="subcategory" name="subcategory" class="subcategory-checkbox">
+</p>
+{% endfor %}

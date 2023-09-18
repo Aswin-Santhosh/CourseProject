@@ -1,0 +1,82 @@
+
+{% extends 'Admin/Header.html'%}
+{% load static %}
+{% block content  %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint Details</title>
+</head>
+<body>
+    <form name="complaintform" method="post">
+        {% csrf_token %}
+        <a href="{% url 'wadmin:Adminhome' %}">Home</a>
+        <table align="center" border="1" cellpadding="5">
+            <tr>
+                <th colspan="7">User Complaint</th>
+            </tr>
+            <tr>
+                <td>Sl No.</td>
+                <td>Complaint Date</td>
+                <td>User name</td>
+                <td>Complaint Title</td>
+                <td>Complaint Details</td>
+                <td>Complaint Reply</td>
+                <td>ACTION</td>
+            </tr>
+            {% for i in DATA %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{i.complaint_date}}</td>
+                <td>{{i.user.user_name}}</td>
+                <td>{{i.complaint_title}}</td>
+                <td>{{i.complaint_content}}</td>
+                <td>{{i.complaint_reply}}</td>
+                <td>{% if i.complaint_status == 0 %}
+                    <a href="{% url 'wadmin:reply_complaint' i.id %}">Reply</a>
+                    {% else %}
+                    replyed
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+
+        </table>
+<br><br><br>
+        <table align="center" border="1" cellpadding="5">
+            <tr><th colspan="7">Shop Complaint</th></tr>
+            <tr>
+                <td>Sl No.</td>
+                <td>Complaint Date</td>
+                <td>Shop name</td>
+                <td>Complaint Title</td>
+                <td>Complaint Details</td>
+                <td>Complaint Reply</td>
+                <td>ACTION</td>
+            </tr>
+            {% for i in SHOPDATA %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{i.complaint_date}}</td>
+                <td>{{i.shop.shop_name}}</td>
+                <td>{{i.complaint_title}}</td>
+                <td>{{i.complaint_content}}</td>
+                <td>{{i.complaint_reply}}</td>
+                <td>{% if i.complaint_status == 0 %}
+                    <a href="{% url 'wadmin:reply_complaint' i.id %}">Reply</a>
+                    {% else %}
+                    replyed
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+
+        </table>
+    </form>
+</body>
+</html>
+
+{% endblock content %}

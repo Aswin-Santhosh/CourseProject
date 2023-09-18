@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Details</title>
+</head>
+<body>
+        
+    <form name="Employee Details" method="post" >
+        {% csrf_token %}
+        <table align="center" cellpadding="5">
+            <tr>
+                <td>Enter First Name :</td>
+                <td>
+                    <input type="text" name="txtfirstname" id="txtfirstname"/>
+                </td>
+            </tr>
+            <tr>
+                <td> Enter Last Name :</td>
+                <td><input type="text" name="txtlastname" id="txtlastname"/></td>
+            </tr>
+            <tr>
+                <td> Gender :</td>
+                <td><input type="radio" name="radio" id="radiomale" value="Male"/>Male
+                <input type="radio" name="radio" id="radiofemale" value="Female"/>Female</td>
+            </tr>
+            <tr>
+                <td>Department :</td>
+                <td><select name="ddldepartment" id="ddldepartment">
+                    <option value="">---Select---</option>
+                    <option value="Sales">Sales</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="Finaces">Finaces</option>
+                    <option value="Production">Production</option>
+                </select>
+                </td>
+            </tr>
+            <tr>
+                <td> Enter Basic Salary :</td>
+                <td><input type="text" name="txtsalary" id="txtsalary"/></td>
+            </tr>
+            
+                <td>
+                    <input type="submit" name="btnSubmit" id="btnSubmit" value="Submit"/>  
+                </td>
+            </tr>
+            <tr>
+                <th>Employee Details</th>
+               
+            </tr>
+            <tr>
+                <td>Full Name</td>
+                <td>{{ name }}</td>
+            </tr>
+            <tr>
+                <td>Gender</td>
+                <td>{{ gender }}</td>
+            </tr>
+            <tr>
+                <td>Department</td>
+                <td>{{ dept }}</td>
+            </tr>
+            <tr>
+                <td>Basic Salary</td>
+                <td>{{ base }}</td>
+            </tr>
+            <tr>
+                <td>LIC</td>
+                <td>{{ LIC }}</td>
+            </tr>
+            <tr>
+                <td>PF</td>
+                <td>{{ PF }}</td>
+            </tr>
+            <tr>
+                <td>Net Salary</td>
+                <td>{{ net }}</td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

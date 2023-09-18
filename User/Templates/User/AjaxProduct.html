@@ -1,0 +1,31 @@
+<div id="data">
+    <table align="center" cellpadding="50" style="border-collapse: collapse">
+        <tr>
+            {% for i in PRODUCT %}
+
+            <td>
+                <div style="text-align:center;border:1px solid black;margin:22px;padding:20px;width: 150px;">
+
+                    <p><img src="{{i.product_image.url}}" width="100px" height="100px" /></p>
+                    
+                    <p>{{i.product_name}}</p>
+                
+                    <p>{{i.product_details}}</p>
+                    
+                    <p>{{i.product_rate}}</p>
+                    <br>
+                    <br>
+                </div>
+            </td>
+            {% if forloop.counter|divisibleby:4 %}
+        </tr>
+        <tr>
+            {% endif %}
+
+
+            {% endfor %}
+    </table>
+    <br><br><br>
+</div> 
+
+<a href="{% url 'wuser:Userhome' %}">Home</a>

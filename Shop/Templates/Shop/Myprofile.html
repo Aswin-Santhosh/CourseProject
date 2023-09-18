@@ -1,0 +1,48 @@
+
+{% extends 'Shop/Header.html'%}
+{% load static %}
+{% block content  %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyProfile</title>
+</head>
+<body>
+    {% csrf_token %}
+    <table align="center" style="margin-top: 100px;" >
+    <tr>
+        <th>My Profile</th>
+    </tr>
+    <tr>
+        <td>Shop Logo</td>
+        <td><img src="{{Data.shop_logo.url}}" alt="img" width="150" height="150"></td>
+    </tr>   
+    <tr>
+        <td>Owner name</td>
+        <td>{{Data.owner_name}}</td>
+    </tr> 
+    <tr>
+        <td>Contact</td>
+        <td>{{Data.shop_contact}}</td>
+    </tr>
+    <tr>
+        <td>Email</td>
+        <td>{{Data.shop_email}}</td>
+    </tr>
+    <tr>
+        <td>Address</td>
+        <td>{{Data.shop_address}}</td>
+    </tr>
+    </table>
+<a href="{% url 'wshop:editprofile' %}">Edit Profile</a>
+<a href="{% url 'wshop:ChangePass' %}">Change Password</a>
+
+<a href="{% url 'wshop:ShopHome' %}">Home</a>
+</body>
+</html>
+
+{% endblock content %}

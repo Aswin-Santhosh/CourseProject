@@ -1,0 +1,49 @@
+
+{% extends 'User/Header.html'%}
+{% load static %}
+{% block content  %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyProfile</title>
+</head>
+<body>
+    {% csrf_token %}
+    <table align="center" border="1" cellspacing="2" cellpadding="10" style="margin-top: 150px;">
+    <tr>
+        <th>My Profile</th>
+    </tr>
+    <tr>
+        <td>Photo</td>
+        <td><img src="{{Data.user_photo.url}}" alt="img" width="150" height="150"></td>
+    </tr>   
+    <tr>
+        <td>name</td>
+        <td>{{Data.user_name}}</td>
+    </tr> 
+    <tr>
+        <td>Contact</td>
+        <td>{{Data.user_contact}}</td>
+    </tr>
+    <tr>
+        <td>Email</td>
+        <td>{{Data.user_email}}</td>
+    </tr>
+    <tr>
+        <td>Gender</td>
+        <td>{{Data.user_gender}}</td>
+    </tr>
+    <tr>
+        <td>Address</td>
+        <td>{{Data.user_address}}</td>
+    </tr>
+    </table>
+</body>
+</html>
+
+{% endblock content %}

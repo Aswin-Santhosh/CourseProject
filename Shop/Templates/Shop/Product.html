@@ -1,0 +1,93 @@
+
+{% extends 'Shop/Header.html'%}
+{% load static %}
+{% block content  %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product</title>
+</head>
+<body>
+    <form  name="productform" method="POST" enctype="multipart/form-data" id="productform" data-subcat-url="{% url 'wshop:ajax_subcategory' %}">
+        {% csrf_token %}
+        <div style="margin-top: 100px;">
+        <table align="center" cellpadding="10" style="margin-top: 100px;">
+            <tr>
+                <td>Product Type</td>
+                <td><select name="ddlproducttype" id="ddlproducttype" required="required">
+                    <option value="">---Select---</option>
+                    {% for i in TYPE %}
+                    <option value="{{i.id}}">{{i.product_type}}</option>
+                    {% endfor %}
+                </select>
+
+                </td>
+            </tr>
+            <tr>
+                <td>Category</td>
+                <td><select name="ddlcategory" id="ddlcategory" required="required">
+                    <option value="">---Select---</option>
+                    {% for i in CATE %}
+                    <option value="{{i.id}}">{{i.category_name}}</option>
+                    {% endfor %}
+                </select></td>
+            </tr>
+            <tr>
+                <td>Subcategory</td>
+                <td><select name="ddlsubcategory" id="ddlsubcategory" required="required">
+                    <option value="">---Select---</option>
+
+
+                </select></td>
+            </tr>
+
+            <tr>
+                <td>Product Name</td>
+            <td><input type="text" id="txtname" name="txtname" autocomplete="off" required="required" pattern="[a-z A-Z]{4-15}" title="minimum 4 and maximum 15 length"></td>
+            </tr>
+            <tr>
+                <td>Product Image</td>
+                <td><input type="file" name="fileimage" id="fileimage" required="required"></td>
+            </tr>
+            <tr>
+                <td>Product Description</td>
+                <td><textarea name="txtdescription" id="txtdescription" cols="30" rows="10" required="required"></textarea></td>
+            </tr>
+            <tr>
+                <td>Product Rate</td>
+                <td><input type="text" id="txtrate" name="txtrate" autocomplete="off" required="required" pattern="[0-9]{3-5}" title="Numbers only Allowed"></td>
+            </tr>
+           
+            <tr>
+                <td align="center"><input type="submit" id="btnSubmit" name="btnSubmit" value="SUBMIT">
+                    <input type="reset" id="btnCancel" name="btnCancel" value="CANCEL"></td>
+            </tr>
+        </table>
+    </div>
+
+    </form>
+  
+</body>
+</html>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $("#ddlcategory").change(function () {
+            var cid = $(this).val();
+            var ur = $("#productform").attr("data-subcat-url");
+            $.ajax({
+                url: ur,
+                data: { CAT: cid, },
+                success: function (data) {
+                    $("#ddlsubcategory").html(data);
+                },
+            });
+        });
+</script>
+
+{% endblock content %}

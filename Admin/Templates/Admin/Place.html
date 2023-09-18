@@ -1,0 +1,66 @@
+
+{% extends 'Admin/Header.html'%}
+{% load static %}
+{% block content  %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place</title>
+</head>
+<body>
+    <form name="Place" method="POST" >
+        {% csrf_token %}
+        <a href="{% url 'wadmin:Adminhome' %}">Home</a>
+        <table align="center">
+            <tr>
+                <td>District</td>
+                <td><select name="ddldistrict" id="ddldistrict">
+                    <option value="">---Select---</option>
+                    {% for i in DIS %}
+                    <option value="{{i.id}}">{{i.district_name}}</option>
+                    {% endfor %}
+                    </select>
+                </td></tr>
+            <tr>
+                <td>Place</td>
+                <td><input type="text" name="txtplace" id="txtplace" autocomplete="off" required="required" pattern="[a-zA-Z]{2,15}" title="minimum 2 and maximum 15 length"/></td>
+            </tr>
+            <tr>
+                <td>Pincode</td>
+                <td><input type="text" name="txtpin" id="txtpin" autocomplete="off" required="required" pattern="[0-9]" title="Numbers only Allowed"/></td>
+            </tr>
+            <tr><td><input type="submit" name="btnSubmit" id="btnSubmit" value="SUBMIT"/></td></tr>
+        </table>
+        <br><br>
+
+        <table align="center">
+            <tr>
+                <td> Sl No</td>
+                <td>District</td>
+                <td>Place Name</td>
+                <td>Place Pincode</td>
+                <td>Action</td>
+            </tr>
+            {% for i in Data %}
+            <tr>
+                <td>{{ forloop.counter }}</td>  
+                <td>{{i.district.district_name}}</td>
+                <td>{{i.place_name}}</td>
+                <td>{{i.place_pin}}</td>
+                <td><a href="{% url 'wadmin:del_place' i.id %}">Delete</a></td>
+                
+            </tr>
+            {% endfor %}
+        </table>
+    
+
+    
+
+       </form>
+</body>
+</html>
+
+{% endblock content %}

@@ -1,0 +1,49 @@
+
+{% extends 'Admin/Header.html'%}
+{% load static %}
+{% block content  %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category</title>
+</head>
+<body>
+    <form name="Category" method="POST" >
+        {% csrf_token %}
+       
+        <table align="center" >
+            <tr>
+                <td>Enter the Category</td>
+                <td><input type="text" name="txtcategory" id="txtcategory" autocomplete="off" required="required" pattern="[a-zA-Z]{2-15}"  title="Only allowed Alphabets" /></td>
+            </tr>
+            <tr><td colspan="2" align="center"><input type="submit" name="btnSubmit" id="btnSubmit" value="SUBMIT"/></td></tr>
+        </table>
+        <br><br>
+
+        <table align="center">
+            <tr>
+                <td> Sl No</td>
+                <td>Category Name</td>
+                <td>Action</td>
+            </tr>
+            {% for i in data %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{i.category_name}}</td>
+                <td><a href="{% url 'wadmin:del_category' i.id %}">Delete</a></td>
+                
+            </tr>
+            {% endfor %}
+        </table>
+    
+
+       </form>
+</body>
+</html>
+
+
+
+{% endblock content %}

@@ -1,0 +1,59 @@
+
+{% extends 'Guest/Header.html'%}
+{% load static %}
+{% block content  %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking page</title>
+</head>
+<body>
+    <form name="bookingform" method="post">
+        {% csrf_token %}
+        <table align="center" cellpadding="5"  style="margin-top: 150px;">
+            <tr>
+                <td>Product name</td>
+                <td>{{PDATA.product_name}}</td>
+            </tr>
+            <tr>
+                <td>Product Rate</td>
+                <td>{{PDATA.product_rate}}<input type="hidden" name="rate" id="rate" value="{{PDATA.product_rate}}"></td>
+            </tr>
+            <tr>
+                <td>Booking Quantity </td>
+                <td><input type="number" id="quantity" name="quantity" min="1" onchange="getTotal()"></td>
+            </tr>
+            <tr>
+                <td>Total Amount</td>
+                <td><input type="text" name="txtamount" id="txtamount" readonly></td>
+                
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" name="btnsubmit" id="btnsubmit" value="SUBMIT">
+                    <input type="reset" name="btnreset" id="btnreset">
+
+                </td>
+            </tr>
+        </table>
+
+    </form>
+    
+<a href="{% url 'wuser:Userhome' %}">Home</a>
+</body>
+</html>
+<script>
+    function getTotal()
+    {
+        let qty=document.getElementById("quantity").value;
+        let rate=document.getElementById("rate").value;
+        let total=qty*rate;
+        document.getElementById("txtamount").value=total;
+    }
+</script>
+{% endblock content %}

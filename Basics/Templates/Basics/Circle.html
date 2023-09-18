@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Area of a Circle</title>
+</head>
+<body>
+    
+   <form name="Circle" method="POST" >
+    {% csrf_token %}
+    <table align="center">
+        <tr>
+            <td>Enter the radius of the Circle</td>
+            <td><input type="text" name="txtradius" id="txtradius"/></td>
+        </tr>
+        <tr><td><input type="submit" name="btnSubmit" id="btnSubmit" value="Find"/></td></tr>
+        <tr>
+            <td>Result</td>
+            <td>{{ res }}</td>
+        </tr>
+    </table>
+
+   </form>
+</body>
+</html>

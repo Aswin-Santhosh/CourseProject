@@ -1,0 +1,58 @@
+
+{% extends 'Admin/Header.html'%}
+{% load static %}
+{% block content  %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sub Category</title>
+</head>
+<body>
+    <form name="SubCategory" method="POST" >
+        {% csrf_token %}
+        <a href="{% url 'wadmin:Adminhome' %}">Home</a>
+        <table align="center">
+            <tr>
+                <td>Category</td>
+                <td><select name="ddlcategory" id="ddlcategory">
+                    <option value="">---Select---</option>
+                    {% for i in CATE %}
+                    <option value="{{i.id}}">{{i.category_name}}</option>
+                    {% endfor %}
+                    </select>
+                </td></tr>
+            <tr>
+                <td>Sub Category</td>
+                <td><input type="text" name="txtsubcategory" id="txtsubcategory" autocomplete="off" required="required" pattern="[a-zA-Z]{2-15}"  title="Only allowed Alphabets"/></td>
+            </tr>
+            <tr><td><input type="submit" name="btnSubmit" id="btnSubmit" value="SUBMIT"/></td></tr>
+        </table>
+    
+        <br><br>
+
+        <table align="center">
+            <tr>
+                <td> Sl No</td>
+                <td>Category Name</td>
+                <td>Subcategory Name</td>
+                <td>Action</td>
+            </tr>
+            {% for i in data %}
+            <tr>
+                <td>{{ forloop.counter }}</td>  
+                <td>{{i.category.category_name}}</td>
+                <td>{{i.subcategory_name}}</td>
+                <td><a href="{% url 'wadmin:del_subcategory' i.id %}">Delete</a></td>
+                
+            </tr>
+            {% endfor %}
+        </table>
+    
+       </form>
+</body>
+</html>
+
+{% endblock content %}

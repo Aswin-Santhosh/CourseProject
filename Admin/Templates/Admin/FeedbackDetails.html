@@ -1,0 +1,44 @@
+
+{% extends 'Admin/Header.html'%}
+{% load static %}
+{% block content  %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Details</title>
+</head>
+<body>
+    <form action="" name="feedbackdetails" method="post">
+        <a href="{% url 'wadmin:Adminhome' %}">Home</a>
+        <table  align="center" border="1" cellpadding="5">
+            <tr>
+                <td>Sl No</td>
+                <td>Feedback Date</td>
+                <td>User name</td>
+                <td>Feedback </td>
+            </tr>
+            {% for i in DATA %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{i.feedback_date}}</td>
+                <td>{{i.user.user_name}}</td>
+                <td>{{i.feedback}}</td>
+            </tr>
+            {% endfor %}
+
+
+
+        </table>
+
+
+
+
+
+    </form>
+</body>
+</html>
+
+{% endblock content %}

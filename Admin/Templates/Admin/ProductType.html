@@ -1,0 +1,49 @@
+
+{% extends 'Admin/Header.html'%}
+{% load static %}
+{% block content  %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category</title>
+</head>
+<body>
+    <form name="Category" method="POST" >
+        {% csrf_token %}
+        <a href="{% url 'wadmin:Adminhome' %}">Home</a>
+        <table align="center">
+            <tr>
+                <td>Product Type</td>
+                <td><input type="text" name="txtproducttype" id="txtproducttype" autocomplete="off" required="required" pattern="[a-zA-Z]{2-15}"  title="Only allowed Alphabets" /></td>
+            </tr>
+            <tr><td><input type="submit" name="btnSubmit" id="btnSubmit" value="SUBMIT"/></td></tr>
+        </table>
+        <br><br>
+
+        <table align="center">
+            <tr>
+                <td> Sl No</td>
+                <td>Product type</td>
+                <td>Action</td>
+            </tr>
+            {% for i in data %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{i.product_type}}</td>
+                <td><a href="{% url 'wadmin:del_productType' i.id %}">Delete</a></td>
+                
+            </tr>
+            {% endfor %}
+        </table>
+    
+
+       </form>
+</body>
+</html>
+
+
+
+{% endblock content %}

@@ -1,0 +1,59 @@
+
+{% extends 'Shop/Header.html'%}
+{% load static %}
+{% block content  %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+</head>
+<body>
+    
+   
+
+ 
+        <table align="center" cellpadding="5" border="1" style="margin-top: 100px;">
+            <tr>
+                <td>Sl.No</td>
+                <td>Shop name</td>
+                <td>Product Type</td>
+                <td>Product Name</td>
+                <td>Product image</td>
+                <td>Product Details</td>
+                <TD>Product Rate</TD>
+                
+                <td>Product Category</td>
+                <td>Product Subcategory</td>
+                <td>ACTION</td>
+            </tr>
+            {% for i in PRODUCT %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{i.shop.shop_name}}</td>
+                <td>{{i.product_type.product_type}}</td>
+                <td>{{i.product_name}}</td>
+                <td><img src="{{i.product_image.url}}" alt="img" width="150px" height="150px"></td>
+                <td>{{i.product_details}}</td>
+                <td>{{i.product_rate}}</td>
+                
+                <td>{{i.subcat.subcategory_name}}</td>
+                <td>{{i.subcat.category.category_name}}</td>
+                <td><a href="{% url 'wshop:del_product' i.id %}">DELETE</a>|||
+                <a href="{% url 'wshop:Gallery' i.id %}">GALLERY</a></td>
+                
+                
+            </tr>
+            {% endfor %}
+        </table>
+
+        
+
+
+    </form>
+</body>
+</html>
+{% endblock content %}

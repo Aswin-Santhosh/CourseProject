@@ -1,0 +1,70 @@
+
+{% extends 'Shop/Header.html'%}
+{% load static %}
+{% block content  %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint</title>
+</head>
+
+<body>
+    <form name="complaintform" method="post">
+        {% csrf_token %}
+        
+        <table  align="center" border="1" cellpadding="5" cellspacing="5" style="margin-top: 100px;">
+            <tr>
+                <TD>Complaint Title</TD>
+                <td><input type="text" id="complainttitle" name="complainttitle" autocomplete="off" required="required" pattern="[a-zA-Z ]{4,15}" title="Complaint Title"></td>
+            </tr>
+            <tr>
+                <td>Complaint Content</td>
+                <td>
+                     <textarea name="complaintcontent" id="complaintcontent" cols="30" rows="10" required></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="submit" id="btnsubmit" name="btnsubmit" value="SUBMIT">
+                    <input type="reset" id="btnreset" name="btnreset" value="RESET"></td>
+            </tr>
+        </table>
+
+        <br> <br> 
+
+
+        <table align="center" border="1" cellpadding="5">
+            <tr>
+                <td>Sl No.</td>
+                <td>Complaint Date</td>
+                <td>Complaint Title</td>
+                <td>Complaint Details</td>
+                <td>Complaint Reply</td>
+                
+            </tr>
+            {% for i in DATA %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{i.complaint_date}}</td>
+                <td>{{i.complaint_title}}</td>
+                <td>{{i.complaint_content}}</td>
+                <td>{{i.complaint_reply}}</td>
+            </tr>
+            {% endfor %}
+
+        </table>
+
+
+
+
+    </form>
+</body>
+
+</html>
+
+{% endblock content %}

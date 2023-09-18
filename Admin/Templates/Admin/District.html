@@ -1,0 +1,48 @@
+
+{% extends 'Admin/Header.html'%}
+{% load static %}
+{% block content  %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>District</title>
+</head>
+<body>
+    <form name="District" method="POST" >
+        {% csrf_token %}
+        <a href="{% url 'wadmin:Adminhome' %}">Home</a>
+        <table align="center">
+            <tr>
+                <td>Enter the District</td>
+                <td><input type="text" name="txtdistrict" autocomplete="off" required="required" pattern="[a-zA-Z]{6,15}" title="world must be minimum 6 and maximum 15 length" id="txtdistrict"/></td>
+            </tr>
+            <tr><td><input type="submit" name="btnSubmit" id="btnSubmit" value="SUBMIT"/></td></tr>
+        </table>
+        <br><br>
+
+        <table align="center">
+            <tr>
+                <td> Sl No</td>
+                <td>District Name</td>
+                <td>Action</td>
+            </tr>
+            {% for i in Data %}
+            <tr>
+                <td>{{ forloop.counter }}</td>  
+                <td>{{i.district_name}}</td>
+                <td><a href="{% url 'wadmin:del_district' i.id %}">Delete</a></td>
+                
+            </tr>
+            {% endfor %}
+        </table>
+    
+
+
+       </form>
+</body>
+</html>
+
+{% endblock content %}

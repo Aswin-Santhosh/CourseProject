@@ -1,0 +1,244 @@
+{% extends 'User/Header.html'%}
+{% load static %}
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+</head>
+<style>
+    body {
+        background-color: antiquewhite;
+    }
+    .main_container{
+        display: flex;
+    }
+    .data{
+        margin-top: 20px;
+    }
+
+    .filter {
+        margin-top: 100px;
+        /* margin-bottom: 500px; */
+        margin-right: 100px;
+        margin-left: 10px;
+        border: 1px solid black;
+        padding: 30px;
+    }
+    .filter-heading{
+        font-size: large;
+        font-weight: 400;
+        
+    }
+
+    .firstchild,
+    .secondchild,
+    .thirdchild {
+        border: 1px solid black;
+        padding: 12px;
+
+    }
+</style>
+
+<body>
+
+    <form name="Productform" method="post" id="productform" data-subcat-url="{% url 'wuser:ajax_subcategory' %}"  data-product-url="{% url 'wuser:Ajax_Product' %}">
+        {% csrf_token %}
+        <br><br>
+        <br>
+        <div class="main_container">
+            <div class="filter">
+
+                <div class="firstchild">
+
+                    <p class="filter-heading">Product type</p>
+                    <p id="product_type"> {% for i in TYPE %}
+                        {{i.product_type}}:<input type="checkbox" value="{{i.id}}" id="producttype" name="producttype" class="producttype-checkbox">
+                    </p>
+                    {% endfor %}
+                  
+                </div><br>
+                <div class="secondchild">
+                    <p class="filter-heading">Category</p>
+                    <!-- <p id="Category"> {% for i in CATE %}
+
+                        {{i.category_name}}:<input type="checkbox" value="{{i.id}}" id="category" name="category">
+                    </p>
+                    {% endfor %} -->
+                    <p id="Category">
+                        {% for i in CATE %}
+                            {{i.category_name}}:
+                            <input type="checkbox" value="{{i.id}}" id="category" name="category" class="category-checkbox">
+                        {% endfor %}
+                    </p>
+                    
+                    
+                </div><br>
+                <div class="thirdchild">
+                <p class="filter-heading">Sub Category</p>
+                <p id="sub_category">
+                     <input type="checkbox" id="subcategory" name="subcategory" class="subcategory-checkbox">
+                </p></div>
+            </div>
+
+            <!-- <table align="center">
+                <tr>
+                    <td>Category</td>
+                    <td><select name="ddlcategory" id="ddlcategory">
+                            <option value="">---SELECT---</option>
+                            {% for i in CATE%}
+                            <option value="{{i.id}}">{{i.category_name}}</option>
+                            {% endfor %}
+                        </select></td>
+
+                    <td>Sub Category</td>
+                    <td><select name="ddlsubcategory" id="ddlsubcategory">
+                            <option value="">---SELECT---</option>
+                        </select></td>
+                </tr>
+
+            </table> -->
+
+            <div class="data">
+                <table align="center" cellpadding="50" style="border-collapse: collapse">
+                    <tr>
+                        {% for i in PRODUCT %}
+
+                        <td>
+                            <div
+                                style="text-align:center;border:1px solid black;margin:15px; padding: 15px;;width: 150px;">
+
+                                <p><img src="{{i.product_image.url}}" width="100px" height="100px" /></p>
+
+                                <p>{{i.product_name}}</p>
+
+                                <p>{{i.product_details}}</p>
+
+                                <p>{{i.product_rate}}</p>
+                                <p><a href="{% url 'wuser:ProductGallery' i.id %}">GALLERY</a></p>
+                                <br>
+                                <p><a href="{% url 'wuser:Productbooking' i.id %}">Book now</a></p>
+                                <br>
+                                <br>
+                            </div>
+                        </td>
+                        {% if forloop.counter|divisibleby:4 %}
+                    </tr>
+                    <tr>
+                        {% endif %}
+                        {% endfor %}
+                </table>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
+<!-- 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $("#ddlcategory").change(function () {
+        var cid = $(this).val();
+        var sid = document.getElementById("ddlsubcategory").value;
+        var ur = $("#productform").attr("data-subcat-url");
+        $.ajax({
+            url: ur,
+            data: { CAT: cid, },
+            success: function (data) {
+                $("#ddlsubcategory").html(data);
+                var ur = $("#productform").attr("data-url");
+                $.ajax({
+                    url: ur,
+                    data: { sid: sid, cid: cid, },
+                    success: function (data) {
+                        $("#data").html(data);
+                    },
+                });
+            },
+        });
+    });
+
+    $("#ddlsubcategory").change(function () {
+        var sid = $(this).val();
+        var cid = document.getElementById("ddlcategory").value;
+        var ur = $("#productform").attr("data-url");
+        $.ajax({
+            url: ur,
+            data: { sid: sid, cid: cid, },
+            success: function (data) {
+                $("#data").html(data);
+            },
+        });
+    });
+</script> -->
+<!-- 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $("#category").click(function () {
+            var cid = $(this).val();
+            var ur = $("#productform").attr("data-subcat-url");
+            $.ajax({
+                url: ur,
+                data: { CATE: cid},
+                success: function (data) {
+                    $("#sub_category").html(data);
+                },
+            });
+        });
+</script> -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    // When a product type checkbox is clicked
+    $(".producttype-checkbox").click(function () {
+        // Collect all selected product type values into an array
+        var selectedProductTypes = $(".producttype-checkbox:checked").map(function() {
+            return this.value.trim();
+        }).get();
+        var selectedCategories = $(".category-checkbox-checkbox:checked").map(function() {
+            return this.value.trim();
+        }).get();
+        var selectedsubcategory = $(".producttype-checkbox:checked").map(function() {
+            return this.value.trim();
+        }).get();
+        
+        
+        // Send the selected values as a comma-separated string or array to your server
+        var ur = $("#productform").attr("data-product-url");
+        $.ajax({
+            url: ur,
+            data: { PRODUCT_TYPES: selectedProductTypes.join(','),},
+            success: function (data) {
+                // Handle the response from the server
+            },
+        });
+    });
+
+    // When a category checkbox is clicked
+    $(".category-checkbox").click(function () {
+        // Collect all selected category values into an array
+        var selectedCategories = $(".category-checkbox:checked").map(function() {
+            return this.value.trim();
+        }).get();
+        console.log(selectedCategories);
+        
+        // Send the selected values as a comma-separated string or array to your server
+        var ur = $("#productform").attr("data-subcat-url");
+        $.ajax({
+            url: ur,
+            data: { CATEGORIES: selectedCategories.join(',')},
+            success: function (data) {
+                $("#sub_category").html(data);
+                // Handle the response from the server
+            },
+        });
+    });
+</script>
+
+
+
+{% endblock content %}

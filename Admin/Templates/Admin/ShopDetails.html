@@ -1,0 +1,57 @@
+
+{% extends 'Admin/Header.html'%}
+{% load static %}
+{% block content  %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Details</title>
+</head>
+<body>
+    <form  name="ShopDetails">
+        {% csrf_token %}
+        <a href="{% url 'wadmin:Adminhome' %}">Home</a>
+        <table align="center" border="1" cellpadding="15">
+            <tr>
+                <td> Sl No</td>
+                <td>Shop Name</td>
+                <td>Shop Owner Name</td>
+                <td>Shop contact</td>
+                <td>email</td>
+                <td>Shop Address</td>
+                <td>Shop Logo</td>
+                <td>Proof</td>
+                <td>Distrct</td>
+                <td>Place</td>
+                <td>SHOP Since</td>
+                <td>Action</td>
+            </tr>
+            {% for i in SHOP %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{i.shop_name}}</td>
+                <td>{{i.owner_name}}</td>
+                <td>{{i.shop_contact}}</td>
+                <td>{{i.shop_email}}</td>
+                <td>{{i.shop_address}}</td>
+                <td><img src="{{i.shop_logo.url}}" alt="{{i.shop_logo.url}}" width="150px" height="150px"></td>
+                <td><img src="{{i.shop_proof.url}}" alt="{{i.shop_proof.url}}" width="150px" height="150px"></td>
+                <td>{{i.place.district.district_name}}</td>
+                <td>{{i.place.place_name}}</td>
+                <td>{{i.shop_since}}</td>
+                <td></td>
+                
+            </tr>
+            {% endfor %}
+        </table>
+  
+    </form>
+
+
+</body>
+</html>
+
+{% endblock content %}

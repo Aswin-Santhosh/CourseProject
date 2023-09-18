@@ -1,0 +1,151 @@
+
+{% extends 'Guest/Header.html'%}
+{% load static %}
+{% block content  %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Registration</title>
+   
+<!-- <style>
+    body{
+        background-color: #cfcfcf;
+    }
+#registration,#userlogin{
+    font-family: "Trebuchet MS";
+    /* width: 20%; */
+}
+
+input[type=email],
+input[type=text],
+input[type=textarea],
+input[type=password] {
+    padding: 5px 20px;
+    display: inline-block;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type=submit] {
+    width: 100%;
+    background-color: #4caf50;
+    color: white;
+    padding: 6px 20px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;    
+
+
+}
+
+input[type=submit]:hover {
+    background-color: #4da049;
+}
+
+div {
+    border-radius: 5px;
+    background-color: #87cbcb;
+    padding: 20px;
+    width: fit-content;
+    margin: 10px auto;
+}
+</style> -->
+</head>
+<body>
+    <form name="ShopRegistration" method="POST" id="Shopform" enctype="multipart/form-data" data-places-url="{% url 'wguest:ajax_place' %}">
+    {% csrf_token %}
+    <div>
+    <table align="center" id="registration" cellpadding="5" style="margin-top: 160px;">
+        <tr>
+            <td>Shop Name</td>
+            <td><input type="text" name="txtshopname" id="txtshopname" autocomplete="off" required="required" pattern="[a-z A-Z]{4-15}" title="minimum 4 and maximum 15 length" ></td>
+        </tr>
+        <tr>
+            <td>contact</td>
+            <td><input type="text" name="txtcontact" id="txtcontact" autocomplete="off" required="required" pattern="[0-9+]{10,13}" title="Numbers only Allowed"></td>
+        </tr>
+        <tr>
+            <td>Owner Name :</td>
+            <td><input type="text" name="txtowner" id="txtowner" autocomplete="off" required="required" pattern="[a-z A-Z]{4-15}" title="minimum 4 and maximum 15 length" ></td>
+        </tr>
+        <tr>
+            <td>Email :</td>
+            <td><input type="email" name="txtemail" id="txtemail" autocomplete="off" required="required" pattern="[0-9a-zA-Z@.]{6-20}" title="Email ID"></td>
+        </tr>
+        <tr>
+            <td>Shop Address</td>
+            <td><textarea name="txtaddress" id="txtaddress" cols="30" rows="10" autocomplete="off" required="required"></textarea></td>
+        </tr>
+        <tr>
+            <td>Skop Logo :</td>
+            <td><input type="file" name="filelogo" id="filelogo" required="required"></td>
+        </tr>
+        <tr>
+            <td>Proof</td>
+            <td><input type="file" name="fileproof" id="fileproof" required="required"></td>
+        </tr>
+        <tr>
+            <td>District</td>
+            <td><select name="ddldistrict" id="ddldistrict" required="required">
+                <option value="">---Select---</option>
+                {% for i in DIS %}
+                <option value="{{i.id}}">{{i.district_name}}</option>
+                {% endfor %}
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td>place</td>
+            <td><select name="ddlplace" id="ddlplace" required="required">
+                <option value="">---Select---</option>
+                {% for i in PLC%}
+                <option value="{{i.id}}">{{i.place_name}}</option>
+                {% endfor %}
+            </select>
+
+            </td>
+        </tr>
+        <tr>
+            <td>Since</td>
+            <td><input type="text" name="txtsince" id="txtsince"  autocomplete="off" required="required" pattern="[0-9a-zA-Z]{4-15}" title="numbers and alphabets are allowed"></td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td><input type="password" name="txtpassword" id="txtpassword"  autocomplete="off" required="required" pattern="[0-9a-zA-Z@#$%]{8-15}" title="@#$% are only allowed in password" ></td>
+        </tr>
+        <tr>
+            <td>
+                <tr><td colspan="2" align="center"><input type="submit" name="btnSubmit" id="btnSubmit" value="REGISTER"/></td></tr>
+            </td>
+        </tr>
+    </table>
+</div>
+</form>
+<a href="{% url 'wguest:GuestHome' %}">Home</a>
+</body>
+</html>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $("#ddldistrict").change(function () {
+            var did = $(this).val();
+            var ur = $("#Shopform").attr("data-places-url");
+            $.ajax({
+                url: ur,
+                data: { DIST: did, },
+                success: function (data) {
+                    $("#ddlplace").html(data);
+                },
+            });
+        });
+</script>
+
+
+{% endblock content %}

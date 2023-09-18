@@ -1,0 +1,35 @@
+
+{% extends 'Shop/Header.html'%}
+{% load static %}
+{% block content  %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery</title>
+</head>
+<body>
+    <form name="Gallery" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table align="center" style="margin-top: 100px;">
+        <tr>
+            <td>File</td>
+            <td><input type="file" name="fileiimage" id="fileimage" required></td>
+        </tr>
+        <tr>
+            <td>Caption</td>
+            <td><input type="text" id="txtcaption" name="txtcaption" required autocomplete="off" pattern="[a-zA-Z ]{5-25}" title="Caption column"></td>
+        </tr>
+        <tr>
+            <td><input type="submit" name="btnSubmit" id="btnSubmit" value="SUBMIT">
+          </td>
+        </tr>
+    </table>
+    </form>
+</body>
+</html>
+{% endblock content %}
